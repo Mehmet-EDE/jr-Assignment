@@ -1,18 +1,18 @@
 import React from "react";
 import {
-  AppBar,
-  Box,
-  Toolbar,
   TextField,
 } from "@mui/material";
-
+import { StyledBox, StyledHeader, StyledToolbar } from "../styledComponents/style";
+import { Colors } from '../constants/colorPalette';
 interface HeaderProps {
   setCountries: React.Dispatch<React.SetStateAction<any[] | string>>
   setFilterText: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedCard: React.Dispatch<React.SetStateAction<string>>;
+  filterText: string;
   data: any[]
 }
 
-function Header({ setCountries, setFilterText, data }: HeaderProps) {
+function Header({ setCountries, setFilterText, filterText, data, setSelectedCard }: HeaderProps) {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -27,17 +27,22 @@ function Header({ setCountries, setFilterText, data }: HeaderProps) {
     )
     if (e.target.value.length) setCountries(filteredCountries.length > 0 ? filteredCountries : "Aradığınız kriterlerle Eşleşen Kayıt Bulunamadı.");
     else setCountries(data)
+    if (filteredCountries.length <= 10) {
+      setSelectedCard(filteredCountries[filteredCountries.length - 1].code)
+    } else {
+      setSelectedCard(filteredCountries[9].code)
+    }
   }
 
   return (
-    <Box sx={{ flexGrow: 1, minWidth: "100%" }}>
-      <AppBar position="static">
-        <Toolbar>
-          <TextField label="Search Country" variant="outlined" onChange={handleInputChange} />
-        </Toolbar>
-      </AppBar>
+    <StyledBox>
+      <StyledHeader >
+        <StyledToolbar>
+          <TextField label="Search Country" variant="filled" value={filterText} sx={{ background: Colors.headerInputColor, borderRadius: 3 }} onChange={handleInputChange} />
+        </StyledToolbar>
+      </StyledHeader>
 
-    </Box>
+    </StyledBox>
   );
 }
 

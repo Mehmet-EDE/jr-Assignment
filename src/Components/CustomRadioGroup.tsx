@@ -19,9 +19,11 @@ interface GroupedCountries {
 
 interface Props {
   data: Country[];
+  selectedContinent: string,
+  setSelectedContinent: any | string | undefined
 }
 
-function CustomRadioGroup({ data }: Props) {
+function CustomRadioGroup({ data, selectedContinent, setSelectedContinent }: Props) {
   const [groupedCountries, setGroupedCountries] = useState<GroupedCountries[]>([]);
 
   useEffect(() => {
@@ -44,11 +46,14 @@ function CustomRadioGroup({ data }: Props) {
 
     groupByContinent(data);
   }, [data]);
-
+  const handleContinentChange = (event: any) => {
+    console.log(event.target.value);
+    setSelectedContinent(event.target.value);
+  };
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">Countries by Continent</FormLabel>
-      <RadioGroup row aria-label="countries-by-continent">
+      <RadioGroup row aria-label="countries-by-continent" value={selectedContinent} onChange={handleContinentChange}>
         {groupedCountries.map((continent) => (
           <FormControlLabel
             key={continent.code}
@@ -57,6 +62,12 @@ function CustomRadioGroup({ data }: Props) {
             label={continent.name}
           />
         ))}
+        <FormControlLabel
+          key="All"
+          value="All"
+          control={<Radio />}
+          label="All Countries"
+        />
       </RadioGroup>
     </FormControl>
   );
