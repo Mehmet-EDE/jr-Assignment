@@ -1,17 +1,13 @@
 import { useEffect } from 'react'
 import { Card, CardContent, CardActionArea, Typography } from '@mui/material'
 import { Colors } from '../constants/colorPalette';
+import { CardProps } from '../Assets/interfaces';
 
-interface CardProps {
-    country: any,
-    selectedCard: string,
-    setSelectedCard: React.Dispatch<React.SetStateAction<string>>
-}
 
 function CustomCards({ country, selectedCard, setSelectedCard }: CardProps) {
 
-    
-    
+
+
     const handleSelectCard = (code: string) => {
         if (selectedCard.length && selectedCard === code) {
             setSelectedCard("")
@@ -29,8 +25,8 @@ function CustomCards({ country, selectedCard, setSelectedCard }: CardProps) {
                 justifyContent: "center",
                 alignItems: 'center',
                 backgroundColor: selectedCard === country.code ? Colors.selectedBG : Colors.defaulBG,
-                borderRadius:3,
-                boxShadow:15
+                borderRadius: 3,
+                boxShadow: 15
             }}
         >
             <CardActionArea onClick={() => handleSelectCard(country.code)}>

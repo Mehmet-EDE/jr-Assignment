@@ -1,9 +1,6 @@
 import React from 'react'
 import { Backdrop, CircularProgress } from "@mui/material";
-interface LoadingProps {
-    open: boolean,
-
-}
+import { LoadingProps } from '../Assets/interfaces';
 function Loading({ open }: LoadingProps) {
     return (
         <Backdrop

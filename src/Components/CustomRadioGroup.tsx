@@ -1,27 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
+import { Continent, Country, GroupedCountries, Props } from '../Assets/interfaces';
 
-interface Continent {
-  code: string;
-  name: string;
-}
-
-interface Country {
-  code: string;
-  name: string;
-  continent: Continent;
-}
-
-interface GroupedCountries {
-  code: string;
-  name: string;
-}
-
-interface Props {
-  data: Country[];
-  selectedContinent: string,
-  setSelectedContinent: any | string | undefined
-}
 
 function CustomRadioGroup({ data, selectedContinent, setSelectedContinent }: Props) {
   const [groupedCountries, setGroupedCountries] = useState<GroupedCountries[]>([]);

@@ -4,13 +4,7 @@ import {
 } from "@mui/material";
 import { StyledBox, StyledHeader, StyledToolbar } from "../styledComponents/style";
 import { Colors } from '../constants/colorPalette';
-interface HeaderProps {
-  setCountries: React.Dispatch<React.SetStateAction<any[] | string>>
-  setFilterText: React.Dispatch<React.SetStateAction<string>>;
-  setSelectedCard: React.Dispatch<React.SetStateAction<string>>;
-  filterText: string;
-  data: any[]
-}
+import { HeaderProps } from "../Assets/interfaces";
 
 function Header({ setCountries, setFilterText, filterText, data, setSelectedCard }: HeaderProps) {
 
@@ -27,9 +21,9 @@ function Header({ setCountries, setFilterText, filterText, data, setSelectedCard
     )
     if (e.target.value.length) setCountries(filteredCountries.length > 0 ? filteredCountries : "Aradığınız kriterlerle Eşleşen Kayıt Bulunamadı.");
     else setCountries(data)
-    if (filteredCountries.length <= 10) {
+    if (filteredCountries.length <= 10 && filteredCountries.length) {
       setSelectedCard(filteredCountries[filteredCountries.length - 1].code)
-    } else {
+    } else if (filteredCountries.length) {
       setSelectedCard(filteredCountries[9].code)
     }
   }

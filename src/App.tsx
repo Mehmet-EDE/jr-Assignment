@@ -8,13 +8,8 @@ import Loading from "./Components/Loading";
 import CustomCards from "./Components/CustomCards";
 import { Box, Grid } from "@mui/material";
 import CustomRadioGroup from "./Components/CustomRadioGroup";
+import { Country } from "./Assets/interfaces";
 
-
-interface Country {
-  code: string;
-  name: string;
-  native: string;
-}
 function App() {
   const { loading, error, data } = useQuery(GET_COUNTRIES, { client });
   const [filterText, setFilterText] = useState<string>('')
