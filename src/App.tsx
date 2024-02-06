@@ -32,12 +32,13 @@ function App() {
   useEffect(() => {
     if (selectedContinent === "All" && data) {
       setCountries(data.countries)
+      setSelectedCard(data.countries[9].code)
     } else if (data && selectedContinent !== "All") {
       let selectedCountries = data.countries.filter((country: any) => country.continent.code === selectedContinent)
       setCountries(selectedCountries)
-      if(selectedCountries.length<=10){
-        setSelectedCard(selectedCountries[selectedCountries.length-1].code)
-      }else{
+      if (selectedCountries.length <= 10) {
+        setSelectedCard(selectedCountries[selectedCountries.length - 1].code)
+      } else {
         setSelectedCard(selectedCountries[9].code)
       }
     }
